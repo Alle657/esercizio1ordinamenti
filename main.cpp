@@ -1,45 +1,42 @@
-#include <stdio.h>
-#define N 10
-
-void stampaArray(int v[]) {
-    for(int i = 0; i < N; i++)
-        printf("%d ", v[i]);
-    printf("\n");
-}
-
-void bubbleSortBandiera(int v[]) {
-    int ordinato = 0;
-    int temp;
-
-    for(int n = N; n > 1 && !ordinato; n--) {
-        ordinato = 1;
-
-        for(int i = 0; i < n - 1; i++) {
-            if(v[i] > v[i+1]) {
-                temp = v[i];
-                v[i] = v[i+1];
-                v[i+1] = temp;
-
-                ordinato = 0;
-
-
-                stampaArray(v);
-            }
-        }
-    }
-}
+#include <iostream>
+using namespace std;
 
 int main() {
-    int v[N];
+    int arr[10];
+    bool scambiato;
 
-    printf("Inserisci 10 numeri interi:\n");
-    for(int i = 0; i < N; i++)
-        scanf("%d", &v[i]);
+    cout << "Inserisci 10 numeri interi:\n";
+    for (int i = 0; i < 10; i++) {
+        cin >> arr[i];
+    }
 
-    bubbleSortBandiera(v);
+    // Bubble Sort con sentinella
+    for (int i = 0; i < 9; i++) {
+        scambiato = false;
 
-    printf("Array ordinato:\n");
-    stampaArray(v);
+        for (int j = 0; j < 9 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+                scambiato = true;
+
+                // Stampa array dopo ogni scambio
+                cout << "Scambio: ";
+                for (int k = 0; k < 10; k++) {
+                    cout << arr[k] << " ";
+                }
+                cout << endl;
+            }
+        }
+
+        if (!scambiato) {
+            break; 
+        }
+    }
+
+    cout << "\nArray ordinato:\n";
+    for (int i = 0; i < 10; i++) {
+        cout << arr[i] << " ";
+    }
 
     return 0;
 }
